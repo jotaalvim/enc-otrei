@@ -1,0 +1,181 @@
+:root {
+  font-family: "Avenir Next", "Trebuchet MS", sans-serif;
+  line-height: 1.45;
+  color: #16312f;
+  background: radial-gradient(circle at top right, #f7f2dd, #e6f1eb 65%, #d6ebf2);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+.app-shell {
+  width: min(980px, 100% - 2rem);
+  margin: 2rem auto;
+  display: grid;
+  gap: 1rem;
+}
+
+.header {
+  padding: 1rem 1.2rem;
+  border-radius: 14px;
+  background: #ffffffc9;
+  border: 1px solid #d6ddd8;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+.header p {
+  margin: 0.4rem 0 0;
+}
+
+.mode-selector {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.mode-btn {
+  border: 1px solid #31625d;
+  background: #f7fdf9;
+  color: #184542;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.mode-btn.active {
+  background: #184542;
+  color: #f7fffc;
+}
+
+.messages {
+  background: #ffffffca;
+  border: 1px solid #d6ddd8;
+  border-radius: 14px;
+  padding: 1rem;
+  display: grid;
+  gap: 0.8rem;
+  max-height: 48vh;
+  overflow: auto;
+}
+
+.message {
+  border-radius: 10px;
+  padding: 0.7rem 0.9rem;
+}
+
+.message p {
+  margin: 0.2rem 0 0;
+}
+
+.message.user {
+  background: #e0f5ff;
+}
+
+.message.assistant {
+  background: #e8f5e8;
+}
+
+.badge {
+  font-size: 0.8rem;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.chat-form {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.chat-form input {
+  flex: 1;
+  padding: 0.8rem;
+  border-radius: 10px;
+  border: 1px solid #b6c8c5;
+}
+
+.chat-form button {
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  border: none;
+  background: #184542;
+  color: #fff;
+  cursor: pointer;
+}
+
+.chat-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.panel {
+  background: #ffffffe0;
+  border: 1px solid #d6ddd8;
+  border-radius: 14px;
+  padding: 1rem;
+}
+
+.dog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 0.8rem;
+}
+
+.dog-card {
+  border: 1px solid #d9e3df;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.dog-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.dog-meta {
+  padding: 0.8rem;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.dog-meta p {
+  margin: 0.3rem 0;
+}
+
+.exercise-list {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.exercise-card {
+  border: 1px solid #d9e3df;
+  border-radius: 12px;
+  padding: 0.8rem;
+  background: #fff;
+}
+
+.error {
+  color: #8d1827;
+  margin: 0;
+}
+
+@media (max-width: 700px) {
+  .app-shell {
+    width: min(980px, 100% - 1rem);
+    margin: 1rem auto;
+  }
+
+  .chat-form {
+    flex-direction: column;
+  }
+}
