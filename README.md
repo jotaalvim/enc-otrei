@@ -13,7 +13,7 @@ O MVP técnico base já está implementado com:
 - chat fim-a-fim (UI -> API -> agente -> resposta);
 - seleção de modo (`adoption` e `training`);
 - tools mockadas para:
-	- pesquisa de cães (`searchDogs`),
+	- pesquisa de cães em fontes portuguesas (`searchDogs`),
 	- geração de plano (`generateTrainingPlan`),
 	- adaptação de plano (`adaptTrainingPlan`).
 
@@ -28,6 +28,17 @@ O MVP técnico base já está implementado com:
 Pré-requisitos:
 - Node.js 16+ (recomendado 18+)
 - npm
+
+Para resultados reais de adoção (fotos reais e link direto para o perfil do cão), cria um ficheiro `.env` na raiz com:
+
+```bash
+PORT=8787
+VITE_API_URL=http://localhost:8787
+```
+
+As fontes de adoção estão configuradas para origem portuguesa.
+No modo adoção, a aplicação tenta obter perfis dinamicamente do Adopta-me com cache diário.
+Se a recolha falhar temporariamente, usa fallback em fontes PT sem quebrar o chat.
 
 1. Instalar dependências
 

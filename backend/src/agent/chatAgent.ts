@@ -7,6 +7,7 @@ import type {
   TrainingPlan
 } from "../../../shared/src/types.js";
 import { adaptTrainingPlan, generateTrainingPlan, searchDogs } from "../tools/mockTools.js";
+import { searchDogsFromAdoptaMe } from "../sources/adoptame.js";
 
 function nowIso(): string {
   return new Date().toISOString();
@@ -90,11 +91,11 @@ function parseGoals(message: string): DogTrainingProfile["behaviorGoals"] {
   return goals.size ? Array.from(goals) : undefined;
 }
 
-function handleAdoption(
+async function handleAdoption(
   message: string,
   profile: AdopterProfile,
   mode: ChatMode
-): ChatResponse {
+): Promise<ChatResponse> {
   if (!mode) {
     return {
       assistantMessage: "Queres usar o modo adocao ou treino?",
@@ -136,9 +137,22 @@ function handleAdoption(
     };
   }
 
-  const dogs = searchDogs(profile.location.city);
+  let dogs = [];
+  let usedFallback = false;
+
+  try {
+    dogs = await searchDogsFromAdoptaMe(profile.location.city);
+  } catch {
+    dogs = searchDogs(profile.location.city);
+    usedFallback = true;
+  }
+
+  const assistantMessage = usedFallback
+    ? `Encontrei ${dogs.length} caes em fontes portuguesas. Estou em fallback temporario mas os links continuam em fontes PT.`
+    : `Encontrei ${dogs.length} caes em fontes portuguesas (atualizacao automatica diaria). Queres que refine por idade, porte ou distrito?`;
+
   return {
-    assistantMessage: `Encontrei ${dogs.length} caes compativeis perto de ${profile.location.city}. Queres que refine por idade ou tamanho?`,
+    assistantMessage,
     mode,
     adopterProfile: profile,
     dogTrainingProfile: defaultTrainingProfile(),
@@ -244,7 +258,7 @@ function handleTraining(
   };
 }
 
-export function processChat(request: ChatRequest): ChatResponse {
+export async function processChat(request: ChatRequest): Promise<ChatResponse> {
   const messages = request.messages ?? [];
   const lastUserMessage = [...messages].reverse().find((m) => m.role === "user")?.content ?? "";
 

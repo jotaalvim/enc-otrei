@@ -12,80 +12,88 @@ function nowIso(): string {
 export function searchDogs(city: string): Dog[] {
   const baseDogs: Dog[] = [
     {
-      id: "pf-1",
-      source: "petfinder-mock",
-      sourceUrl: "https://www.petfinder.com/",
-      name: "Nina",
-      breed: "Podengo Portugues",
+      id: "adopta-petal-4a3b67433a6944",
+      source: "adopta-me",
+      sourceUrl: "https://www.adopta-me.org/animal.php?sid=4a3b67433a6944",
+      name: "Petal",
+      breed: "Rafeiro Comum",
       isMix: true,
-      age: "young",
+      age: "adult",
       sex: "female",
-      size: "small",
-      photos: ["https://images.unsplash.com/photo-1517849845537-4d257902454a?w=600"],
-      description: "Sociavel, curiosa e habituada a apartamento.",
+      size: "large",
+      photos: ["https://www.adopta-me.org/media/image/40409694-Petal.jpeg"],
+      description:
+        "Cadela meiga e sociavel. Perfil publicado no Adopta-me por associacao de Setubal.",
       goodWith: { children: true, dogs: true, cats: null },
       energyLevel: "medium",
       specialNeeds: false,
       shelter: {
-        name: "Associacao Amiga Animal",
-        address: `${city}`,
-        lat: 41.15,
-        lng: -8.61
+        name: "O Cantinho da Milu",
+        address: "Setubal",
+        lat: 38.5244,
+        lng: -8.8882
       },
       available: true,
       listedAt: nowIso()
     },
     {
-      id: "pf-2",
-      source: "petfinder-mock",
-      sourceUrl: "https://www.petfinder.com/",
-      name: "Bolt",
-      breed: "Mestico",
+      id: "adopta-nelly-2a70467e6f487e",
+      source: "adopta-me",
+      sourceUrl: "https://www.adopta-me.org/animal.php?sid=2a70467e6f487e",
+      name: "Nelly",
+      breed: "Rafeiro Comum",
       isMix: true,
       age: "adult",
-      sex: "male",
-      size: "medium",
-      photos: ["https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=600"],
-      description: "Muito meigo e ideal para familias ativas.",
-      goodWith: { children: true, dogs: true, cats: false },
-      energyLevel: "high",
-      specialNeeds: false,
-      shelter: {
-        name: "Canil Municipal",
-        address: `${city}`,
-        lat: 41.16,
-        lng: -8.62
-      },
-      available: true,
-      listedAt: nowIso()
-    },
-    {
-      id: "pf-3",
-      source: "petfinder-mock",
-      sourceUrl: "https://www.petfinder.com/",
-      name: "Lua",
-      breed: "Serra da Estrela",
-      isMix: false,
-      age: "puppy",
       sex: "female",
-      size: "small",
-      photos: ["https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=600"],
-      description: "Cachorra jovem, aprende rapido e adora brincar.",
-      goodWith: { children: true, dogs: true, cats: true },
+      size: "large",
+      photos: ["https://www.adopta-me.org/media/image/47238561-nelly.jpeg"],
+      description:
+        "Cadela adulta e equilibrada, com perfil real no Adopta-me e contacto para adocao em Setubal.",
+      goodWith: { children: true, dogs: true, cats: null },
       energyLevel: "medium",
       specialNeeds: false,
       shelter: {
-        name: "Refugio Patas Felizes",
-        address: `${city}`,
-        lat: 41.17,
-        lng: -8.59
+        name: "O Cantinho da Milu",
+        address: "Setubal",
+        lat: 38.5244,
+        lng: -8.8882
+      },
+      available: true,
+      listedAt: nowIso()
+    },
+    {
+      id: "adopta-luke-33532a76522f21",
+      source: "adopta-me",
+      sourceUrl: "https://www.adopta-me.org/animal.php?sid=33532a76522f21",
+      name: "Luke",
+      breed: "Rafeiro Comum",
+      isMix: false,
+      age: "young",
+      sex: "male",
+      size: "medium",
+      photos: ["https://www.adopta-me.org/media/image/36522054-Luke.jpeg"],
+      description:
+        "Cao jovem e sociavel com outros caes. Perfil real no Adopta-me com mais informacao de adocao.",
+      goodWith: { children: true, dogs: true, cats: null },
+      energyLevel: "high",
+      specialNeeds: false,
+      shelter: {
+        name: "O Cantinho da Milu",
+        address: "Setubal",
+        lat: 38.5244,
+        lng: -8.8882
       },
       available: true,
       listedAt: nowIso()
     }
   ];
 
-  return baseDogs;
+  // Enquanto o scraper portugues nao estiver ativo, devolvemos um conjunto base
+  // de perfis reais do Adopta-me para manter foto/link consistentes.
+  return baseDogs.map((dog) => ({
+    ...dog,
+    distanceKm: city.toLowerCase() === "setubal" ? 5 : 45
+  }));
 }
 
 export function generateTrainingPlan(dogProfile: DogTrainingProfile): TrainingPlan {

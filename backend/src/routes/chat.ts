@@ -4,10 +4,17 @@ import { processChat } from "../agent/chatAgent.js";
 
 const router = Router();
 
-router.post("/chat", (req, res) => {
-  const body = (req.body ?? {}) as ChatRequest;
-  const response = processChat(body);
-  res.json(response);
+router.post("/chat", async (req, res) => {
+  try {
+    const body = (req.body ?? {}) as ChatRequest;
+    const response = await processChat(body);
+    res.json(response);
+  } catch (error) {
+    res.status(500).json({
+      error: "Failed to process chat",
+      details: error instanceof Error ? error.message : "Unknown error"
+    });
+  }
 });
 
 router.get("/health", (_req, res) => {
