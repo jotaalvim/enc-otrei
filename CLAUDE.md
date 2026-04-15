@@ -44,9 +44,8 @@ No modo treino, o agente mantém também um **perfil do cão atual** e um **hist
 │  │             │    │                          │   │
 │  │ • Mensagens │    │ • Perfil do adotante     │   │
 │  │ • Dog cards │    │ • Lógica de perguntas    │   │
-│  │ • Plano     │    │ • Decisão de pesquisar   │   │
-│  │   treino    │    │ • Decisão de treinar     │   │
-│  │ • Mapa      │    │ • Interpretação feedback │   │
+│  │ • Plano treino │  │ • Decisão de pesquisar   │   │
+│  │ • Mapa      │    │ • Decisão de treinar     │   │
 │  └─────────────┘    │ • Interpretação feedback │   │
 │                     └──────────┬─────────────┘    │
 │                                │ tool calls         │
